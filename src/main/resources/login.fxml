@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: linear-gradient(to bottom right, #1a2a6c, #b21f1f, #fdbb2d);" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.malek.pos.controllers.LoginController">
+   <children>
+      <VBox alignment="CENTER" layoutX="275.0" layoutY="50.0" prefHeight="500.0" prefWidth="350.0" spacing="20.0" style="-fx-background-color: rgba(255, 255, 255, 0.95); -fx-background-radius: 15;">
+         <effect>
+            <DropShadow color="#00000066" height="50.0" radius="24.5" width="50.0" />
+         </effect>
+         <padding>
+            <Insets bottom="40.0" left="40.0" right="40.0" top="40.0" />
+         </padding>
+         <children>
+            <Label text="MALEK" textFill="#2c3e50">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <Label text="ENTERPRISE" textFill="#2c3e50">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+             <Label text="POS SYSTEM" textFill="#7f8c8d">
+                 <font>
+                     <Font name="System Bold" size="18.0" />
+                 </font>
+             </Label>
+            
+            <Label fx:id="lblStatus" textFill="#e74c3c" wrapText="true" />
+            
+            <VBox spacing="10.0">
+               <children>
+                  <Label text="Username" textFill="#34495e">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="txtUsername" promptText="admin" style="-fx-background-color: #ecf0f1; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </VBox>
+            
+            <VBox spacing="10.0">
+               <children>
+                  <Label text="Password" textFill="#34495e">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <PasswordField fx:id="txtPassword" promptText="••••••" style="-fx-background-color: #ecf0f1; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </PasswordField>
+               </children>
+            </VBox>
+            
+            <Button fx:id="btnLogin" defaultButton="true" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#handleLogin" style="-fx-background-color: #1a2a6c; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;" text="SECURE LOGIN">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </Button>
+            
+             <Label text="OR USE PIN" textFill="#95a5a6">
+                 <font>
+                     <Font size="12.0" />
+                 </font>
+             </Label>
+            
+            <HBox spacing="10.0" alignment="CENTER">
+                 <PasswordField fx:id="txtPin" promptText="PIN" prefWidth="120" alignment="CENTER" style="-fx-background-color: #f7f9f9; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-background-radius: 5; -fx-padding: 8;">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                 </PasswordField>
+                 <Button mnemonicParsing="false" onAction="#handlePinLogin" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-background-radius: 5; -fx-cursor: hand;" text="GO">
+                    <font>
+                       <Font name="System Bold" size="14.0" />
+                    </font>
+                    <padding>
+                       <Insets bottom="8.0" left="20.0" right="20.0" top="8.0" />
+                    </padding>
+                 </Button>
+            </HBox>
+         </children>
+      </VBox>
+      <Label layoutX="14.0" layoutY="569.0" text="System v1.0 | Support: +27 62 869 6027" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
+         <font>
+            <Font size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

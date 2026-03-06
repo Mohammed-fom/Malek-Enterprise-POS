@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.malek.pos.controllers.SupplierManagementController">
+    <center>
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+            <!-- TAB 1: Supplier List -->
+            <Tab text="Suppliers List">
+                <BorderPane>
+                    <top>
+                        <HBox spacing="10" style="-fx-padding: 10;">
+                             <Button text="+ Add New Supplier" onAction="#onAddSupplier" />
+                             <Button text="Refresh" onAction="#onRefreshSuppliers" />
+                        </HBox>
+                    </top>
+                    <center>
+                        <TableView fx:id="tblSuppliers">
+                            <columns>
+                                <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+                                <TableColumn fx:id="colCompany" text="Company" prefWidth="200"/>
+                                <TableColumn fx:id="colContact" text="Contact Person" prefWidth="150"/>
+                                <TableColumn fx:id="colPhone" text="Phone" prefWidth="120"/>
+                                <TableColumn fx:id="colBalance" text="Current Balance" prefWidth="100"/>
+                            </columns>
+                        </TableView>
+                    </center>
+                </BorderPane>
+            </Tab>
+
+            <!-- TAB 2: Receive Stock (GRN) -->
+            <Tab text="Receive Stock (GRN)">
+                <VBox spacing="15" style="-fx-padding: 20;">
+                    <GridPane hgap="10" vgap="10">
+                        <Label text="Supplier:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="cmbSupplier" prefWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                        
+                        <Label text="Invoice #:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                        <TextField fx:id="txtInvoice" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+                        
+                        <Label text="Add Product (ID/Barcode):" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <HBox spacing="5" alignment="CENTER_LEFT" GridPane.rowIndex="1" GridPane.columnIndex="1">
+                            <TextField fx:id="txtProductSearch" onAction="#onAddProduct" promptText="Scan or Search..."/>
+                            <Button text="?" onAction="#onOpenProductSearch" style="-fx-font-weight: bold;"/>
+                        </HBox>
+                        
+                        <Label text="Quantity:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                        <TextField fx:id="txtQuantity" text="1" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+                        
+                        <Label text="Unit Cost (Incl):" GridPane.rowIndex="1" GridPane.columnIndex="4"/>
+                        <TextField fx:id="txtCost" GridPane.rowIndex="1" GridPane.columnIndex="5"/>
+
+                        <Label text="Retail (Incl):" GridPane.rowIndex="1" GridPane.columnIndex="6"/>
+                        <TextField fx:id="txtRetail" GridPane.rowIndex="1" GridPane.columnIndex="7"/>
+                        
+                        <Button text="Add Item" onAction="#onAddItem" GridPane.rowIndex="1" GridPane.columnIndex="8"/>
+                    </GridPane>
+                    
+                    <TableView fx:id="tblPurchaseItems" VBox.vgrow="ALWAYS">
+                         <columns>
+                             <TableColumn fx:id="colPiId" text="Prod ID" prefWidth="80"/>
+                             <TableColumn fx:id="colPiDesc" text="Description" prefWidth="250"/>
+                             <TableColumn fx:id="colPiQty" text="Qty" prefWidth="80"/>
+                             <TableColumn fx:id="colPiCost" text="Unit Cost (Incl)" prefWidth="100"/>
+                             <TableColumn fx:id="colPiRetail" text="Retail (Incl)" prefWidth="100"/>
+                             <TableColumn fx:id="colPiTotal" text="Total Cost" prefWidth="100"/>
+                         </columns>
+                    </TableView>
+                    
+                    <HBox alignment="CENTER_RIGHT" spacing="20">
+                        <Label text="Total Cost: "><font><Font name="System Bold" size="16"/></font></Label>
+                        <Label fx:id="lblTotalCost" text="0.00"><font><Font name="System Bold" size="16"/></font></Label>
+                        <Button text="Process Stock Receipt" onAction="#onProcessGRN" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-size: 14;"/>
+                    </HBox>
+                </VBox>
+            </Tab>
+
+            <!-- TAB 3: Payments -->
+            <Tab text="Make Payments">
+                <VBox spacing="20" style="-fx-padding: 40;" alignment="TOP_CENTER">
+                    <Label text="Supplier Payment">
+                        <font><Font size="24"/></font>
+                    </Label>
+                    
+                    <GridPane hgap="15" vgap="15" alignment="CENTER">
+                        <Label text="Select Supplier:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="cmbPaySupplier" prefWidth="200" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                        
+                        <Label text="Current Balance:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <Label fx:id="lblPayBalance" text="0.00" textFill="RED" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                        
+                        <Label text="Payment Amount:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <TextField fx:id="txtPayAmount" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                    </GridPane>
+                    
+                    <Button text="Confirm Payment" onAction="#onConfirmPayment" prefWidth="200" prefHeight="40" style="-fx-background-color: #2980b9; -fx-text-fill: white;"/>
+                </VBox>
+            </Tab>
+        </TabPane>
+    </center>
+</BorderPane>

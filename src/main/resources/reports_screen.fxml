@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="700.0" prefWidth="1000.0" style="-fx-background-color: #f4f6f7;" stylesheets="@styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.malek.pos.controllers.ReportsController">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #2c3e50; -fx-padding: 15;">
+            <Label styleClass="header-label" text="Real-Time Analytics" textFill="WHITE" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Button onAction="#onRefresh" styleClass="action-button" text="Refresh Now" />
+            <Button onAction="#onClose" styleClass="danger-button" text="Close" />
+        </HBox>
+    </top>
+    
+    <center>
+        <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE">
+            
+            <!-- TAB 1: DASHBOARD (Overview) -->
+            <Tab text="Dashboard">
+                <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+                    <content>
+                        <VBox spacing="20" style="-fx-padding: 20;">
+                            
+                            <!-- KPI TILES -->
+                            <GridPane hgap="20" vgap="20">
+                                <columnConstraints>
+                                    <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints minHeight="100.0" />
+                                </rowConstraints>
+                                
+                                <VBox styleClass="card" alignment="CENTER" style="-fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);">
+                                    <Label text="Today's Sales" textFill="#7f8c8d" />
+                                    <Label fx:id="lblTodaySales" text="R0.00" textFill="#2ecc71" style="-fx-font-weight: bold;">
+                                        <font><Font name="System" size="24" /></font>
+                                    </Label>
+                                </VBox>
+                                <VBox styleClass="card" alignment="CENTER" style="-fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);" GridPane.columnIndex="1">
+                                    <Label text="Transactions" textFill="#7f8c8d" />
+                                    <Label fx:id="lblTodayTxCount" text="0" textFill="#3498db" style="-fx-font-weight: bold;">
+                                        <font><Font name="System" size="24" /></font>
+                                    </Label>
+                                </VBox>
+                                <VBox styleClass="card" alignment="CENTER" style="-fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);" GridPane.columnIndex="2">
+                                    <Label text="Avg Basket" textFill="#7f8c8d" />
+                                    <Label fx:id="lblAvgBasket" text="R0.00" textFill="#e67e22" style="-fx-font-weight: bold;">
+                                        <font><Font name="System" size="24" /></font>
+                                    </Label>
+                                </VBox>
+                                <VBox styleClass="card" alignment="CENTER" style="-fx-background-color: white; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);" GridPane.columnIndex="3">
+                                    <Label text="Est. Profit" textFill="#7f8c8d" />
+                                    <Label fx:id="lblTodayProfit" text="R0.00" textFill="#9b59b6" style="-fx-font-weight: bold;">
+                                        <font><Font name="System" size="24" /></font>
+                                    </Label>
+                                </VBox>
+                            </GridPane>
+                            
+                            <Separator />
+                            
+                            <!-- CHARTS ROW -->
+                            <HBox spacing="20" prefHeight="400">
+                                <VBox styleClass="card" HBox.hgrow="ALWAYS" style="-fx-background-color: white;">
+                                    <Label text="Dead Stock (No Sales > 3 Months)" styleClass="subheader-label" />
+                                    <TableView fx:id="tblDeadStock" VBox.vgrow="ALWAYS">
+                                        <columns>
+                                            <TableColumn fx:id="colDeadDesc" text="Product Description" prefWidth="250" />
+                                            <TableColumn fx:id="colDeadStock" text="Stock" prefWidth="80" style="-fx-alignment: CENTER;" />
+                                        </columns>
+                                        <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
+                                    </TableView>
+                                </VBox>
+                                
+                                <VBox styleClass="card" HBox.hgrow="ALWAYS" style="-fx-background-color: white;">
+                                    <Label text="Best Selling Products" styleClass="subheader-label" />
+                                    <TableView fx:id="tblTopProducts" VBox.vgrow="ALWAYS">
+                                        <columns>
+                                            <TableColumn fx:id="colTopDesc" text="Product" prefWidth="200" />
+                                            <TableColumn fx:id="colTopQty" text="Qty" prefWidth="50" style="-fx-alignment: CENTER;" />
+                                            <TableColumn fx:id="colTopRev" text="Revenue" prefWidth="80" style="-fx-alignment: CENTER-RIGHT;" />
+                                        </columns>
+                                         <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
+                                    </TableView>
+                                </VBox>
+                            </HBox>
+                            
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </Tab>
+            
+            <!-- TAB 2: SALES REPORT (Detailed) -->
+            <Tab text="Sales Report">
+                <BorderPane style="-fx-padding: 20;">
+                    <top>
+                        <HBox spacing="15" alignment="CENTER_LEFT" style="-fx-padding: 0 0 15 0;">
+                            <Label text="Date Range:" />
+                            <DatePicker fx:id="dpStart" prefWidth="120" />
+                            <Label text="to" />
+                            <DatePicker fx:id="dpEnd" prefWidth="120" />
+                            <Button onAction="#onFilterSales" styleClass="action-button" text="Apply Filter" />
+                            <Separator orientation="VERTICAL" />
+                            <Button onAction="#onExportPDF" styleClass="secondary-button" text="Export PDF" />
+                        </HBox>
+                    </top>
+                    <center>
+                        <VBox spacing="10" styleClass="card" style="-fx-padding: 10;">
+                             <HBox spacing="40" style="-fx-padding: 10; -fx-background-color: #ecf0f1;">
+                                <Label text="Total Revenue:" style="-fx-font-weight: bold;" />
+                                <Label fx:id="lblReportRevenue" text="R0.00" />
+                                <Label text="Tax Collected:" style="-fx-font-weight: bold;" />
+                                <Label fx:id="lblReportTax" text="R0.00" />
+                                <Label text="Net Profit:" style="-fx-font-weight: bold;" />
+                                <Label fx:id="lblReportProfit" text="R0.00" />
+                             </HBox>
+                             <TableView fx:id="tblSalesBreakdown" VBox.vgrow="ALWAYS">
+                                 <columns>
+                                     <TableColumn fx:id="colMethod" text="Payment Method" />
+                                     <TableColumn fx:id="colCount" text="Transactions" />
+                                     <TableColumn fx:id="colAmount" text="Total Amount" />
+                                 </columns>
+                                 <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
+                             </TableView>
+                        </VBox>
+                    </center>
+                </BorderPane>
+            </Tab>
+            
+            <!-- TAB 3: LAYBY REPORTS -->
+            <Tab text="Layby Reports">
+                <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+                    <content>
+                        <VBox spacing="20" style="-fx-padding: 20;">
+                            <!-- Top: Date Filter (Shared or Specific? Let's use shared logic or duplicate controls. Logic in Controller uses shared dpStart/End for ease, or we add new ones. Plan said reusing existing logic is fine but usually tabs have own controls or global. Let's use the global ones from Sales tab? No, they are inside Sales Tab. I need new controls or move controls to Top. Moving to top is best but risky for layout. I will add duplicates here for simplicity as per plan "Layby Reports ... section".) -->
+                            <!-- Actually, user "Update existing onFilterSales ... to trigger loadLaybyData" implies shared or simultaneous. But controls are inside Sales Tab in FXML. I should probably copy the filter bar or move it out. -->
+                            <!-- To allow specific filtering for Layby without messing Sales, I'll add a filter bar here too. -->
+                            
+                            <HBox spacing="15" alignment="CENTER_LEFT" style="-fx-padding: 0 0 10 0;">
+                                <Label text="Analyze Period:" style="-fx-font-weight: bold;"/>
+                                <DatePicker fx:id="dpLaybyStart" prefWidth="120" />
+                                <Label text="to" />
+                                <DatePicker fx:id="dpLaybyEnd" prefWidth="120" />
+                                <Button onAction="#onFilterLayby" styleClass="action-button" text="Update Report" />
+                            </HBox>
+                            
+                            <!-- KPI Cards Row 1: Snapshot (Active) -->
+                            <Label text="Current Snapshot (All Active)" styleClass="subheader-label" />
+                            <GridPane hgap="20" vgap="20">
+                                <columnConstraints>
+                                    <ColumnConstraints hgrow="ALWAYS" percentWidth="33.3" />
+                                    <ColumnConstraints hgrow="ALWAYS" percentWidth="33.3" />
+                                    <ColumnConstraints hgrow="ALWAYS" percentWidth="33.3" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints minHeight="100.0" />
+                                </rowConstraints>
+                                
+                                <VBox styleClass="card" alignment="CENTER" style="-fx-background-color: white;">
+                                    <Label text="Active Laybys" textFill="#7f8c8d" />
+                                    <Label fx:id="lblActiveLaybys" text="0" textFill="#2980b9" style="-fx-font-weight: bold;">
+                                        <font><Font name="System" size="24" /></font>
+                                    </Label>
+                                </VBox>
+                                <VBox styleClass="card" alignment="CENTER" style="-fx-background-color: white;" GridPane.columnIndex="1">
+                                    <Label text="Stock Value Locked" textFill="#7f8c8d" />
+                                    <Label fx:id="lblValueLocked" text="R0.00" textFill="#d35400" style="-fx-font-weight: bold;">
+                                        <font><Font name="System" size="24" /></font>
+                                    </Label>
+                                </VBox>
+                                <VBox styleClass="card" alignment="CENTER" style="-fx-background-color: white;" GridPane.columnIndex="2">
+                                    <Label text="Outstanding Balance" textFill="#7f8c8d" />
+                                    <Label fx:id="lblOutstandingBalance" text="R0.00" textFill="#c0392b" style="-fx-font-weight: bold;">
+                                        <font><Font name="System" size="24" /></font>
+                                    </Label>
+                                </VBox>
+                            </GridPane>
+                            
+                            <Separator />
+                            
+                            <!-- Activity & Financials -->
+                            <Label text="Period Activity &amp; Financials" styleClass="subheader-label" />
+                            <GridPane hgap="20" vgap="20">
+                                <columnConstraints>
+                                    <ColumnConstraints hgrow="ALWAYS" percentWidth="20.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" percentWidth="20.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" percentWidth="20.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" percentWidth="20.0" />
+                                    <ColumnConstraints hgrow="ALWAYS" percentWidth="20.0" />
+                                </columnConstraints>
+                                
+                                <VBox styleClass="card" style="-fx-background-color: #fcf3cf; -fx-padding: 10;">
+                                    <Label text="New Opened" />
+                                    <Label fx:id="lblNewLaybys" text="0" style="-fx-font-weight: bold; -fx-font-size: 16;" />
+                                </VBox>
+                                <VBox styleClass="card" style="-fx-background-color: #d5f5e3; -fx-padding: 10;" GridPane.columnIndex="1">
+                                    <Label text="Completed" />
+                                    <Label fx:id="lblCompletedLaybys" text="0" style="-fx-font-weight: bold; -fx-font-size: 16;" />
+                                </VBox>
+                                <VBox styleClass="card" style="-fx-background-color: #fadbd8; -fx-padding: 10;" GridPane.columnIndex="2">
+                                    <Label text="Cancelled" />
+                                    <Label fx:id="lblCancelledLaybys" text="0" style="-fx-font-weight: bold; -fx-font-size: 16;" />
+                                </VBox>
+                                <VBox styleClass="card" style="-fx-background-color: #ebf5fb; -fx-padding: 10;" GridPane.columnIndex="3">
+                                    <Label text="Total Collected" /> <!-- Merged Deposits + Installments -->
+                                    <Label fx:id="lblLaybyRevenue" text="R0.00" style="-fx-font-weight: bold; -fx-font-size: 16;" />
+                                </VBox>
+                            </GridPane>
+                            
+                            <Separator />
+                            
+                            <!-- Watchlist Table -->
+                            <Label text="Risk Watchlist (Expiring within 7 Days)" styleClass="subheader-label" style="-fx-text-fill: #e74c3c;" />
+                            <TableView fx:id="tblExpiringLaybys" prefHeight="200" VBox.vgrow="NEVER">
+                                <columns>
+                                    <TableColumn fx:id="colRiskId" text="Layby ID" prefWidth="120" />
+                                    <TableColumn fx:id="colRiskCustomer" text="Customer" prefWidth="200" />
+                                    <TableColumn fx:id="colRiskStart" text="Start Date" prefWidth="100" />
+                                    <TableColumn fx:id="colRiskExpiry" text="Expiry Date" prefWidth="100" />
+                                    <TableColumn fx:id="colRiskBalance" text="Balance Due" prefWidth="100" style="-fx-alignment: CENTER-RIGHT;" />
+                                </columns>
+                                <columnResizePolicy><TableView fx:constant="CONSTRAINED_RESIZE_POLICY" /></columnResizePolicy>
+                            </TableView>
+                        </VBox>
+                    </content>
+                </ScrollPane>
+            </Tab>
+            
+        </TabPane>
+    </center>
+</BorderPane>

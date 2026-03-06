@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" spacing="20.0" style="-fx-padding: 30; -fx-background-color: white; -fx-border-color: #8e44ad; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.malek.pos.controllers.ShiftController">
+    <children>
+        <Label fx:id="lblTitle" text="SHIFT MANAGEMENT" textFill="#2c3e50">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Label>
+        
+        <Separator prefWidth="200.0" />
+        
+        <!-- Opening Shift UI -->
+        <VBox fx:id="boxOpenShift" alignment="CENTER" spacing="10.0">
+            <children>
+                <Label text="Start New Shift" textFill="#8e44ad">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label text="Enter Opening Float:" />
+                <TextField fx:id="txtFloat" alignment="CENTER" maxWidth="200.0" promptText="0.00">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </TextField>
+                <Button defaultButton="true" mnemonicParsing="false" onAction="#onStartShift" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #27ae60; -fx-text-fill: white;" text="START SHIFT">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+            </children>
+        </VBox>
+        
+        <!-- Closing Shift UI (Hidden by default) -->
+        <VBox fx:id="boxCloseShift" alignment="CENTER" spacing="10.0" visible="false" managed="false">
+            <children>
+                <Label text="End Shift (Z-Read)" textFill="#c0392b">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Label>
+                <Label text="Declared Cash:" />
+                <TextField fx:id="txtDeclaredCash" alignment="CENTER" maxWidth="200.0" promptText="0.00" />
+                <Label text="Declared Card:" />
+                <TextField fx:id="txtDeclaredCard" alignment="CENTER" maxWidth="200.0" promptText="0.00" />
+                
+                <Button defaultButton="true" mnemonicParsing="false" onAction="#onEndShift" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #c0392b; -fx-text-fill: white;" text="CLOSE SHIFT">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+            </children>
+        </VBox>
+        
+        <Label fx:id="lblStatus" textFill="#e74c3c" />
+    </children>
+</VBox>

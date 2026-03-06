@@ -1,0 +1,37 @@
+
+    // Classic Style Helpers
+    private static Node createDashedLine(double width) {
+        Line line = new Line(0, 0, width, 0);
+        line.getStrokeDashArray().addAll(4d, 4d);
+        return line;
+    }
+
+    private static void addClassicMetaRow(GridPane grid, String label, String value, int row) {
+        Label l = new Label(label);
+        l.setFont(Font.font("Times New Roman", FontWeight.NORMAL, 10));
+        
+        Label v = new Label(value);
+        v.setFont(Font.font("Times New Roman", FontWeight.BOLD, 10));
+        v.setWrapText(true);
+
+        grid.add(l, 0, row);
+        grid.add(v, 1, row);
+    }
+    
+    private static Label styledClassicHeader(String text) {
+        Label l = new Label(text);
+        l.setFont(Font.font("Times New Roman", FontWeight.BOLD, 10)); // Serif
+        l.setUnderline(true);
+        return l;
+    }
+
+    private static void addClassicTotalRow(GridPane grid, String label, String value, int row, boolean bold) {
+        Label l = new Label(label);
+        l.setFont(Font.font("Times New Roman", bold ? FontWeight.BOLD : FontWeight.NORMAL, 10));
+        
+        Label v = new Label(value);
+        v.setFont(Font.font("Times New Roman", bold ? FontWeight.BOLD : FontWeight.NORMAL, 10));
+        
+        grid.add(l, 0, row);
+        grid.add(v, 1, row);
+    }

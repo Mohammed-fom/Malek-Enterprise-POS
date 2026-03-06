@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="20.0" style="-fx-padding: 30; -fx-background-color: #2c3e50;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label text="KEYBOARD SHORTCUTS" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="24.0" />
+            </font>
+        </Label>
+        
+        <HBox spacing="50.0">
+             <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                 <Label text="NAVIGATION" textFill="#f1c40f" style="-fx-font-weight: bold;"/>
+                 <Label text="F1   - Focus Barcode / Processing" textFill="WHITE"/>
+                 <Label text="F2   - Debtors List" textFill="WHITE"/>
+                 <Label text="F3   - Stock Lookup" textFill="WHITE"/>
+                 <Label text="F4   - Shift / Admin" textFill="WHITE"/>
+                 <Label text="F9   - Transaction History" textFill="WHITE"/>
+                 <Label text="Ctrl+R - Matched Refunds" textFill="WHITE"/>
+             </VBox>
+             
+             <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                 <Label text="SALES OPERATIONS" textFill="#f1c40f" style="-fx-font-weight: bold;"/>
+                 <Label text="F5   - Save Quote" textFill="WHITE"/>
+                 <Label text="F6   - Recall Quote" textFill="WHITE"/>
+                 <Label text="F7   - Toggle Ad-hoc Refund Mode" textFill="WHITE"/>
+                 <Label text="F8   - Void Transaction" textFill="WHITE"/>
+                 <Label text="F10  - Checkout / Payment" textFill="WHITE"/>
+                 <Label text="F11  - Hold / Suspend Sale" textFill="WHITE"/>
+                 <Label text="F12  - Resume Sale" textFill="WHITE"/>
+             </VBox>
+             
+             <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                 <Label text="ITEM CONTROLS" textFill="#f1c40f" style="-fx-font-weight: bold;"/>
+                 <Label text="DEL  - Remove Selected Item" textFill="WHITE"/>
+                 <Label text="+    - Increase Quantity" textFill="WHITE"/>
+                 <Label text="-    - Decrease Quantity" textFill="WHITE"/>
+                 <Label text="*    - Set Exact Quantity" textFill="WHITE"/>
+                 <Label text="ESC  - Clear Screen" textFill="WHITE"/>
+             </VBox>
+        </HBox>
+        
+        <Label text="Press ESC to Close" textFill="#95a5a6" style="-fx-padding: 20 0 0 0;"/>
+    </children>
+</VBox>

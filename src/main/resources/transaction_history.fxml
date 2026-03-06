@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml" fx:controller="com.malek.pos.controllers.TransactionHistoryController" prefWidth="1200" prefHeight="800">
+    <top>
+        <VBox spacing="10" style="-fx-padding: 10; -fx-background-color: #f4f4f4; -fx-border-color: #ddd; -fx-border-width: 0 0 1 0;">
+            <Label text="Transaction History" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+            <HBox spacing="15" alignment="CENTER_LEFT">
+                <Label text="From:" />
+                <DatePicker fx:id="dpStartDate" prefWidth="120" />
+                <Label text="To:" />
+                <DatePicker fx:id="dpEndDate" prefWidth="120" />
+                
+                <Label text="Type:" />
+                <ComboBox fx:id="cmbType" prefWidth="100" />
+                
+                <TextField fx:id="txtSearch" promptText="Search ID, Ref, Amount..." HBox.hgrow="ALWAYS" />
+                
+                <Button text="Reset Filters" onAction="#onResetFilters" />
+            </HBox>
+        </VBox>
+    </top>
+    <center>
+        <SplitPane dividerPositions="0.6" style="-fx-background-color: transparent;">
+            <!-- Left: Master List -->
+            <VBox>
+                <TableView fx:id="tblTransactions" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colId" text="ID" prefWidth="60" />
+                        <TableColumn fx:id="colCustomId" text="Ref #" prefWidth="120" />
+                        <TableColumn fx:id="colDate" text="Date" prefWidth="140" />
+                        <TableColumn fx:id="colType" text="Type" prefWidth="90" />
+                        <TableColumn fx:id="colDebtor" text="Customer" prefWidth="150" />
+                        <TableColumn fx:id="colTotal" text="Total" prefWidth="100" />
+                        <TableColumn fx:id="colStatus" text="Status" prefWidth="100" />
+                    </columns>
+                    <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                    </columnResizePolicy>
+                </TableView>
+            </VBox>
+            
+            <!-- Right: Detail View -->
+            <VBox spacing="10" style="-fx-padding: 10;">
+                <Label text="Transaction Details" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+                
+                <HBox spacing="10">
+                    <Label text="ID:" style="-fx-font-weight: bold;" />
+                    <Label fx:id="lblDetailId" text="-" />
+                    <Label text="Date:" style="-fx-font-weight: bold;" />
+                    <Label fx:id="lblDetailDate" text="-" />
+                </HBox>
+                 <HBox spacing="10">
+                    <Label text="Customer:" style="-fx-font-weight: bold;" />
+                    <Label fx:id="lblDetailCustomer" text="-" />
+                </HBox>
+                
+                <TableView fx:id="tblDetailItems" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="colDetailProduct" text="Product" prefWidth="150" />
+                        <TableColumn fx:id="colDetailQty" text="Qty" prefWidth="60" style="-fx-alignment: CENTER-RIGHT;" />
+                        <TableColumn fx:id="colDetailPrice" text="Price" prefWidth="80" style="-fx-alignment: CENTER-RIGHT;" />
+                        <TableColumn fx:id="colDetailTotal" text="Total" prefWidth="80" style="-fx-alignment: CENTER-RIGHT;" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+                    </columnResizePolicy>
+                </TableView>
+                
+                <VBox spacing="5" style="-fx-background-color: #ecf0f1; -fx-padding: 10; -fx-background-radius: 5;">
+                     <HBox alignment="CENTER_RIGHT" spacing="10">
+                        <Label text="Subtotal:" />
+                        <Label fx:id="lblDetailSubtotal" text="0.00" style="-fx-font-weight: bold;" />
+                    </HBox>
+                    <HBox alignment="CENTER_RIGHT" spacing="10">
+                        <Label text="Tax:" />
+                        <Label fx:id="lblDetailTax" text="0.00" style="-fx-font-weight: bold;" />
+                    </HBox>
+                    <HBox alignment="CENTER_RIGHT" spacing="10">
+                        <Label text="Grand Total:" style="-fx-font-size: 14px;" />
+                        <Label fx:id="lblDetailTotal" text="0.00" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #e74c3c;" />
+                    </HBox>
+                </VBox>
+                
+                <HBox spacing="10" alignment="CENTER_RIGHT">
+                    <Button text="Reprint Receipt" fx:id="btnReprint" onAction="#onReprint" disable="true" style="-fx-background-color: #3498db; -fx-text-fill: white;" />
+                    <Button text="Refund" fx:id="btnRefund" visible="false" /> <!-- Future Use -->
+                </HBox>
+
+            </VBox>
+        </SplitPane>
+    </center>
+    <bottom>
+        <HBox spacing="10" 	alignment="CENTER_RIGHT" style="-fx-padding: 10; -fx-background-color: #ddd;">
+            <Button text="Refresh" onAction="#onRefresh" prefWidth="100"/>
+            <Button text="Close" onAction="#onClose" prefWidth="100"/>
+        </HBox>
+    </bottom>
+</BorderPane>
